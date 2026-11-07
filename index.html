@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="description" content="DocYonder business plan: product, market need, price gap, business model, roadmap and risks.">
+<meta property="og:title" content="DocYonder Business Plan">
+<meta property="og:description" content="Find the right doctor, near you or around the world. Product, market, business model and roadmap.">
+<meta property="og:image" content="https://www.docyonder.com/og-image.png">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="https://www.docyonder.com/favicon.ico">
+<title>DocYonder Business Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: a single readable column like a clinical referral letter, with one wide band for the price chart. */
+:root {
+  --blue: #007bff;          /* DocYonder brand blue (from the site) */
+  --blue-ink: #0056b3;
+  --navy: #0f2a44;          /* headings, wordmark */
+  --text: #2b3f55;
+  --muted: #5d6f84;         /* blue-biased neutral */
+  --line: #dbe4ee;
+  --paper: #fbfcfe;
+  --panel: #eef5fd;
+  --abroad: #007bff;
+  --home: #b7c4d3;
+  --good: #137a4b;
+  --warn: #9a5b00;
+  --warn-bg: #fff6e5;
+  --font-display: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-data: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --step--1: 0.84rem;
+  --step-0: 1rem;
+  --step-1: 1.2rem;
+  --step-2: 1.5rem;
+  --step-3: 2.2rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --blue: #4da3ff; --blue-ink: #8cc4ff; --navy: #e8f1fb; --text: #c7d4e2; --muted: #8fa3b8;
+    --line: #22364c; --paper: #0b1826; --panel: #10243a; --abroad: #4da3ff; --home: #3a5068;
+    --good: #57d39a; --warn: #f2b453; --warn-bg: #2a2111;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --blue: #4da3ff; --blue-ink: #8cc4ff; --navy: #e8f1fb; --text: #c7d4e2; --muted: #8fa3b8;
+  --line: #22364c; --paper: #0b1826; --panel: #10243a; --abroad: #4da3ff; --home: #3a5068;
+  --good: #57d39a; --warn: #f2b453; --warn-bg: #2a2111;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--text);
+  font: 400 var(--step-0)/1.65 var(--font-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing: antialiased;
+}
+.doc { max-width: 760px; margin: 0 auto; padding-block: 3rem 4rem; display: grid; gap: 3.25rem; }
+h1, h2, h3 { font-family: var(--font-display); color: var(--navy); line-height: 1.2; text-wrap: balance; margin: 0; }
+h2 { font-size: var(--step-2); font-weight: 800; letter-spacing: -0.01em; }
+h3 { font-size: var(--step-1); font-weight: 700; }
+p { margin: 0; }
+a { color: var(--blue-ink); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; border-radius: 4px; }
+.label {
+  font: 600 var(--step--1)/1.2 var(--font-data);
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);
+}
+section { display: grid; gap: 1rem; }
+section > p, .prose p { max-width: 65ch; }
+
+/* Letterhead */
+.letterhead { display: grid; gap: 1.25rem; padding-bottom: 2rem; border-bottom: 2px solid var(--navy); }
+.letterhead-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.75rem 1.5rem; }
+.wordmark { font: 800 1.6rem/1 var(--font-display); color: var(--navy); letter-spacing: -0.02em; }
+.wordmark span { color: var(--blue); }
+.meta { font: 500 var(--step--1)/1.5 var(--font-data); color: var(--muted); text-align: right; }
+.letterhead h1 { font-size: var(--step-3); font-weight: 800; letter-spacing: -0.02em; max-width: 22ch; }
+.summary { font-size: var(--step-1); line-height: 1.6; color: var(--text); max-width: 60ch; }
+.live { display: inline-flex; align-items: center; gap: 0.45rem; font: 600 var(--step--1)/1 var(--font-data); color: var(--good); }
+.live::before { content: ""; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--good); }
+
+/* Key facts */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.fact { display: grid; gap: 0.35rem; align-content: start; padding: 1rem 1.1rem; background: var(--panel); border-radius: 6px; }
+.fact strong { font: 600 1.7rem/1.1 var(--font-data); color: var(--navy); font-variant-numeric: tabular-nums; }
+.fact span { font-size: var(--step--1); color: var(--muted); }
+.cite { font-size: 0.75em; vertical-align: super; line-height: 0; text-decoration: none; font-family: var(--font-data); }
+
+/* Lists */
+.feature-list, .plain-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.85rem; }
+.feature-list li { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; padding-top: 0.85rem; border-top: 1px solid var(--line); }
+.feature-list li:first-child { border-top: 0; padding-top: 0; }
+.feature-list b { color: var(--navy); font-weight: 700; }
+.feature-list .status { align-self: start; justify-self: start; margin-top: 0.2rem; }
+.plain-list li { padding-left: 1.1rem; position: relative; max-width: 65ch; }
+.plain-list li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 0.4rem; height: 2px; background: var(--blue); }
+
+/* Journey: a real sequence */
+.journey { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: 0.9rem; }
+.journey li { counter-increment: step; display: grid; grid-template-columns: 2.2rem 1fr; gap: 0.9rem; align-items: start; }
+.journey li::before {
+  content: counter(step); display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%;
+  border: 2px solid var(--blue); color: var(--blue); font: 600 0.95rem/1 var(--font-data);
+}
+.journey b { color: var(--navy); }
+
+/* Price gap chart */
+.chart-band { display: grid; gap: 1rem; padding: 1.5rem; background: var(--panel); border-radius: 8px; }
+.legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: var(--step--1); color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 0.45rem; }
+.legend i { width: 1.4rem; height: 0.55rem; border-radius: 3px; display: inline-block; }
+.legend .k-abroad { background: var(--abroad); }
+.legend .k-home { background: var(--home); }
+.chart { display: grid; gap: 1.1rem; }
+.row { display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 1fr); gap: 0.4rem 1rem; align-items: center; }
+.row-name { font-weight: 700; color: var(--navy); font-size: 0.95rem; line-height: 1.3; }
+.row-name small { display: block; font-weight: 500; color: var(--muted); font-size: 0.78rem; }
+.track { position: relative; height: 1.7rem; background: linear-gradient(to right, var(--line) 1px, transparent 1px) 0 0 / 25% 100%; }
+.bar { position: absolute; height: 0.6rem; border-radius: 3px; }
+.bar.home { top: 0.1rem; background: var(--home); }
+.bar.abroad { top: 0.95rem; background: var(--abroad); }
+.figures { grid-column: 2; display: flex; flex-wrap: wrap; gap: 0.2rem 1rem; font: 500 0.78rem/1.3 var(--font-data); font-variant-numeric: tabular-nums; color: var(--muted); }
+.f-abroad { color: var(--blue-ink); }
+.saving { font-weight: 600; color: var(--good); }
+.note { font-size: var(--step--1); color: var(--muted); max-width: 70ch; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.93rem; min-width: 560px; }
+th, td { text-align: left; vertical-align: top; padding: 0.75rem 0.9rem; border-bottom: 1px solid var(--line); }
+thead th { font: 600 0.72rem/1.2 var(--font-data); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); background: var(--panel); }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+tbody th { color: var(--navy); font-weight: 700; }
+.num { font-family: var(--font-data); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.status { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 999px; font: 600 0.72rem/1.4 var(--font-data); white-space: nowrap; }
+.s-now { color: var(--good); background: color-mix(in srgb, var(--good) 14%, transparent); }
+.s-next { color: var(--blue-ink); background: color-mix(in srgb, var(--blue) 14%, transparent); }
+.s-later { color: var(--muted); background: color-mix(in srgb, var(--muted) 14%, transparent); }
+
+/* Example calculation */
+.calc { display: grid; gap: 0.5rem; padding: 1rem 1.2rem; border: 1px dashed var(--line); border-radius: 6px; font-size: 0.93rem; }
+.calc-row { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--line); padding-bottom: 0.45rem; }
+.calc-row:last-of-type { border-bottom: 0; font-weight: 700; color: var(--navy); }
+.calc .num { color: var(--navy); }
+
+/* Roadmap */
+.phases { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; }
+.phase { display: grid; gap: 0.6rem; align-content: start; padding-top: 0.9rem; border-top: 3px solid var(--line); }
+.phase.now { border-top-color: var(--good); }
+.phase.next { border-top-color: var(--blue); }
+.phase ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.35rem; font-size: 0.93rem; }
+
+/* Risks */
+.risk { display: grid; grid-template-columns: minmax(0, 12rem) 1fr; gap: 0.3rem 1.25rem; padding-block: 0.9rem; border-top: 1px solid var(--line); }
+.risk:first-of-type { border-top: 0; }
+.risk b { color: var(--navy); }
+
+.ask { display: grid; gap: 1rem; padding: 1.5rem; border-radius: 8px; background: var(--navy); color: var(--paper); }
+.ask h2 { color: var(--paper); }
+.ask .plain-list li::before { background: var(--paper); }
+.ask a { color: var(--paper); font-weight: 700; }
+
+.sources { font-size: 0.82rem; color: var(--muted); display: grid; gap: 0.6rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+.sources ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.3rem; }
+
+@media (max-width: 560px) {
+  .doc { padding-block: 2rem 3rem; gap: 2.5rem; }
+  .meta { text-align: left; }
+  .feature-list li, .risk { grid-template-columns: 1fr; gap: 0.25rem; }
+  .row { grid-template-columns: 1fr; }
+  .figures { grid-column: 1; }
+  .chart-band { padding: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}:root[data-theme="dark"]{color-scheme:dark}</style>
+</head>
+<body>
+<main class="doc">
+  <header class="letterhead">
+    <div class="letterhead-top">
+      <div class="wordmark">Doc<span>Yonder</span></div>
+      <div class="meta">Business plan · November 2026<br>Prepared by Aprampal · <a href="https://www.docyonder.com">docyonder.com</a></div>
+    </div>
+    <h1>Find the right doctor, near you or around the world.</h1>
+    <p class="summary">
+      DocYonder explains a person's symptoms or medical report in plain language, then shows two paths:
+      well-reviewed doctors nearby, and, for treatments people commonly travel for, trusted destinations
+      abroad with typical prices. It earns money by connecting patients who choose treatment abroad with
+      partner clinics and travel services.
+    </p>
+    <span class="live">Product is live at www.docyonder.com</span>
+  </header>
+
+  <section aria-labelledby="why">
+    <h2 id="why">Why this matters</h2>
+    <div class="facts">
+      <div class="fact"><strong>28.6 weeks</strong><span>Median wait in Canada from GP referral to treatment, 2025<a class="cite" href="#src-1">1</a></span></div>
+      <div class="fact"><strong>≈105,500</strong><span>Canadians estimated to have gone abroad for medical care in 2025<a class="cite" href="#src-2">2</a></span></div>
+      <div class="fact"><strong>48.6 weeks</strong><span>Median wait for orthopaedic surgery in Canada, 2025<a class="cite" href="#src-1">1</a></span></div>
+    </div>
+    <ul class="plain-list">
+      <li><b>Lab results are hard to read.</b> Patients often get reports days before an appointment and don't know which values matter.</li>
+      <li><b>People don't know which doctor to see.</b> Many start with a general search and end up at the wrong specialist.</li>
+      <li><b>Waits and prices push people abroad, with little guidance.</b> Dental work, cosmetic surgery, IVF and some operations are often slow or expensive at home, and most information about going abroad comes from sites that sell the trip.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="product">
+    <h2 id="product">What DocYonder does today</h2>
+    <ul class="feature-list">
+      <li><span class="status s-now">Live</span><p><b>Symptom check.</b> A person describes how they feel; AI gives a preliminary read, picks the right kind of doctor, and flags possible emergencies.</p></li>
+      <li><span class="status s-now">Live</span><p><b>Report explainer.</b> Upload a lab result, scan report or photo (including scanned PDFs). Each result is listed with its normal range and marked low, high or normal, then explained in plain language.</p></li>
+      <li><span class="status s-now">Live</span><p><b>Doctors near you, anywhere.</b> Uses the visitor's location or a typed city to show nearby doctors from Google Maps, with distance, rating, opening hours and Call, Directions and Message.</p></li>
+      <li><span class="status s-now">Live</span><p><b>Treatment abroad.</b> For nine treatments people commonly travel for, shows well-known destinations, typical prices against home, what packages include, and top-rated clinics, with a "Get a free quote" button.</p></li>
+      <li><span class="status s-now">Live</span><p><b>Accounts and privacy.</b> Saved reports, password reset by email, owner-only access to medical files, and one free try of each feature for guests.</p></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="journey">
+    <h2 id="journey">How a patient moves through DocYonder</h2>
+    <ol class="journey">
+      <li><p><b>Starts with their own situation.</b> Describes symptoms or uploads a report.</p></li>
+      <li><p><b>Understands it.</b> Gets a plain-language explanation and the right kind of specialist.</p></li>
+      <li><p><b>Sees local care first.</b> Nearby doctors they can call today.</p></li>
+      <li><p><b>Compares going abroad, when it makes sense.</b> Destinations, typical prices and well-reviewed clinics.</p></li>
+      <li><p><b>Requests a quote.</b> DocYonder's team matches them with partner clinics and helps plan travel.</p></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="gap">
+    <h2 id="gap">The price gap</h2>
+    <p>Typical advertised price ranges for treatments shown on DocYonder, against typical US self-pay prices. Each row uses its own scale, starting at $0.</p>
+    <div class="chart-band">
+      <div class="legend"><span><i class="k-home"></i>US self-pay</span><span><i class="k-abroad"></i>Abroad (destinations on DocYonder)</span></div>
+      <div class="chart" id="chart" role="img" aria-label="Price ranges abroad compared with US self-pay prices for eight treatments"></div>
+    </div>
+    <p class="note">In Canada and the UK, knee replacement and heart surgery are publicly covered; for those, the gap that matters is waiting time. Prices are estimates gathered from published guides, many of which promote treatment abroad. Real quotes vary, and travel is extra.<a class="cite" href="#src-4">4</a></p>
+  </section>
+
+  <section aria-labelledby="model">
+    <h2 id="model">How DocYonder makes money</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Revenue stream</th><th scope="col">How it works</th><th scope="col">Typical rate</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Clinic referral commission</th><td>Partner clinic pays a share of the treatment price when a referred patient is treated.</td><td class="num">5–20%<a class="cite" href="#src-3">3</a></td><td><span class="status s-next">Next</span></td></tr>
+          <tr><th scope="row">Coordination fee</th><td>Patient pays for full trip planning: clinic matching, hotel, transfers, translator.</td><td class="num">Flat fee</td><td><span class="status s-later">Later</span></td></tr>
+          <tr><th scope="row">Travel affiliate commission</th><td>Commission from hotel and flight partners when a patient books through DocYonder links.</td><td class="num">Per booking</td><td><span class="status s-next">Next</span></td></tr>
+          <tr><th scope="row">Sponsored listings</th><td>Clinics pay for extra visibility, always labelled "Sponsored" and never mixed into rankings.</td><td class="num">Monthly</td><td><span class="status s-later">Later</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="calc" aria-label="Example calculation">
+      <span class="label">Example, one hair transplant referral (illustrative)</span>
+      <div class="calc-row"><span>Treatment package in Istanbul (midpoint of typical range)</span><span class="num">$3,000</span></div>
+      <div class="calc-row"><span>Referral commission at 10%</span><span class="num">× 10%</span></div>
+      <div class="calc-row"><span>DocYonder revenue per treated patient</span><span class="num">$300</span></div>
+    </div>
+    <p class="note">The local side (symptom check, report explainer, doctors near you) stays free. It builds trust and brings in the patients who later need treatment abroad.</p>
+  </section>
+
+  <section aria-labelledby="customers">
+    <h2 id="customers">Who it's for and how we reach them</h2>
+    <ul class="plain-list">
+      <li><b>Canadians facing long waits or uninsured costs</b>, especially for dental implants, IVF, cosmetic and orthopaedic care.</li>
+      <li><b>US patients paying out of pocket</b>, where the price gap is largest.</li>
+      <li><b>Diaspora communities</b> who already travel home and want trusted clinics there.</li>
+      <li><b>Channels:</b> search (people already type "dental implants abroad"), short explainer videos on reading lab results, community groups, and referral partnerships with clinics.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="competition">
+    <h2 id="competition">Competition</h2>
+    <p>Medical travel platforms such as Bookimed, PlacidWay and MyMediTravel already list clinics and prices. They start from the sale: a procedure and a destination.</p>
+    <p>DocYonder starts from the patient's own symptoms or report, shows local care first, and only suggests going abroad when it fits. Prices come with sources, and ratings come from Google Maps rather than the clinics themselves. That neutrality is the trust advantage, and it has to be protected as partner clinics join.</p>
+  </section>
+
+  <section aria-labelledby="roadmap">
+    <h2 id="roadmap">Roadmap</h2>
+    <div class="phases">
+      <div class="phase now"><span class="label">Now</span><ul><li>Product live at docyonder.com</li><li>Brand, domain and business email</li><li>Worldwide doctor search and treatment comparisons</li></ul></div>
+      <div class="phase next"><span class="label">Next</span><ul><li>"Get a quote" form with budget, dates and records</li><li>First 3–5 partner clinics (Istanbul, Tijuana, Budapest)</li><li>Licensed photography and video</li><li>Hotel and flight affiliate links</li></ul></div>
+      <div class="phase"><span class="label">Later</span><ul><li>Patient coordinators and full travel packages</li><li>Verified clinic profiles with accreditation (e.g. JCI)</li><li>More treatments and languages</li></ul></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="risks">
+    <h2 id="risks">Risks and how we handle them</h2>
+    <div>
+      <div class="risk"><b>Medical advice and liability</b><p>Every result is labelled a preliminary explanation, urgent findings trigger emergency guidance, and patients are told to see a doctor. Legal review and liability insurance before taking payments.</p></div>
+      <div class="risk"><b>Health data privacy</b><p>Files are private to their owner and secrets stay off the code. Next: privacy policy, consent screens and a PIPEDA/PHIPA review.</p></div>
+      <div class="risk"><b>Selling travel</b><p>Start with affiliate links, where the travel company makes the sale. Selling travel directly from Ontario would likely require TICO registration.</p></div>
+      <div class="risk"><b>Conflicts of interest</b><p>Commissions could bias recommendations. Partner status will always be disclosed, and sponsored placement kept separate from ratings.</p></div>
+      <div class="risk"><b>AI accuracy</b><p>The report explainer reads the document directly and is checked for consistency; results are structured so errors are visible. Ongoing testing with real reports is planned.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="costs">
+    <h2 id="costs">What it costs to run</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Item</th><th scope="col">What it's for</th><th scope="col">Cost</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Railway</th><td>Website, server and database hosting</td><td class="num">From about $5 / month</td></tr>
+          <tr><th scope="row">OpenAI</th><td>Symptom checks and report explanations</td><td class="num">Pay per use</td></tr>
+          <tr><th scope="row">Google Maps Places</th><td>Doctors near you and top-rated clinics</td><td class="num">Free monthly allowance, then pay per search</td></tr>
+          <tr><th scope="row">Google Workspace</th><td>Business email</td><td class="num">Per user, monthly</td></tr>
+          <tr><th scope="row">Domains</th><td>docyonder.com, docongo.org</td><td class="num">About $10–20 / year each</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Search results are cached and searches are rate-limited to keep usage costs low while traffic is small.</p>
+  </section>
+
+  <section class="ask" aria-labelledby="ask">
+    <h2 id="ask">What we're looking for</h2>
+    <ul class="plain-list">
+      <li>Partner clinics in Istanbul, Tijuana and Budapest willing to pilot referrals</li>
+      <li>An advisor on health privacy, medical-travel regulation and liability</li>
+      <li>Early users to test the report explainer with real lab results</li>
+      <li>Mentorship on go-to-market and fundraising</li>
+    </ul>
+    <p>Contact: <a href="mailto:contact@docyonder.com">contact@docyonder.com</a> · <a href="https://www.docyonder.com">www.docyonder.com</a></p>
+  </section>
+
+  <footer class="sources" aria-labelledby="sources">
+    <span class="label" id="sources">Sources</span>
+    <ol>
+      <li id="src-1">Fraser Institute, <a href="https://www.fraserinstitute.org/STUDIES/WAITING-YOUR-TURN-WAIT-TIMES-FOR-HEALTH-CARE-IN-CANADA-2025">Waiting Your Turn: Wait Times for Health Care in Canada, 2025</a>. Based on a physician survey.</li>
+      <li id="src-2">Fraser Institute, Leaving Canada for Medical Care, 2025, as reported in <a href="https://www.finanzen.net/nachricht/aktien/more-than-105-000-canadians-estimated-to-have-left-canada-for-medical-treatment-last-year-15411889">this release</a>. An estimate based on specialist responses; its method has been questioned.</li>
+      <li id="src-3">Published facilitator rates vary: <a href="https://my1health.com/referral-partner-network/commission-rates">My1Health</a> (5–15%), <a href="https://track360.io/blog/medical-tourism-affiliate-referral-marketing-operator-guide-2026">Track360</a> (10–20%). No independent industry survey was found.</li>
+      <li id="src-4">Price ranges as shown on DocYonder, from published guides including the <a href="https://www.better.medicaltourism.com/article/cardiac-surgery-cost-comparison-by-country">Medical Tourism Association</a>, <a href="https://www.placidway.com/article/5662/Top-Nations-for-Weight-Loss-Surgery-Where-Patients-Go-for-Affordable-Care">PlacidWay</a>, <a href="https://us-uk.bookimed.com/article/where-to-get-the-cheapest-dental-implants-abroad">Bookimed</a> and <a href="https://eurofertile.pages.dev/compare/ivf-europe-vs-usa/">EuroFertile</a>; full source list on each treatment in the product.</li>
+    </ol>
+    <p>© 2026 Aprampal, DocYonder. All rights reserved.</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  // Same ranges the live product shows (USD). Each row is scaled to its own US maximum.
+  const rows = [
+    { name: 'Hair transplant', unit: 'per procedure', home: [10000, 15000], abroad: [2000, 4000] },
+    { name: 'Dental implant', unit: 'per implant', home: [3000, 5000], abroad: [700, 1400] },
+    { name: 'Weight-loss surgery', unit: 'gastric sleeve', home: [15000, 25000], abroad: [3000, 7000] },
+    { name: 'Knee replacement', unit: 'per knee', home: [35000, 65000], abroad: [4000, 18000] },
+    { name: 'Rhinoplasty', unit: 'per procedure', home: [8000, 15000], abroad: [4000, 7500] },
+    { name: 'IVF', unit: 'one cycle, own eggs', home: [12000, 25000], abroad: [2700, 6600] },
+    { name: 'LASIK', unit: 'per eye', home: [2000, 3000], abroad: [800, 2500] },
+    { name: 'Heart bypass', unit: 'per procedure', home: [70000, 150000], abroad: [5000, 25000] },
+  ];
+  const fmt = (n) => '$' + (n >= 10000 ? Math.round(n / 1000) + 'k' : n.toLocaleString('en-US'));
+  const chart = document.getElementById('chart');
+  rows.forEach((r) => {
+    const max = r.home[1] * 1.08; // a little headroom for the end label
+    const pct = (v) => (v / max) * 100;
+    const mid = (a) => (a[0] + a[1]) / 2;
+    const saving = Math.round((1 - mid(r.abroad) / mid(r.home)) * 100);
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.innerHTML =
+      '<div class="row-name">' + r.name + '<small>' + r.unit + '</small></div>' +
+      '<div class="track">' +
+        '<div class="bar home" style="left:' + pct(r.home[0]) + '%;width:' + (pct(r.home[1]) - pct(r.home[0])) + '%"></div>' +
+        '<div class="bar abroad" style="left:' + pct(r.abroad[0]) + '%;width:' + (pct(r.abroad[1]) - pct(r.abroad[0])) + '%"></div>' +
+      '</div>' +
+      '<div class="figures"><span class="f-abroad">Abroad ' + fmt(r.abroad[0]) + '–' + fmt(r.abroad[1]) + '</span>' +
+      '<span class="f-home">US ' + fmt(r.home[0]) + '–' + fmt(r.home[1]) + '</span>' +
+      '<span class="saving">≈' + saving + '% lower at the midpoint</span></div>';
+    chart.appendChild(row);
+  });
+})();
+</script>
+
+</body>
+</html>
