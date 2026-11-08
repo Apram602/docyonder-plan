@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>DocYonder Pitch Deck</title>
+<meta name="description" content="DocYonder pitch deck: find the right doctor, near you or around the world.">
+<meta property="og:title" content="DocYonder Pitch Deck">
+<meta property="og:description" content="Find the right doctor, near you or around the world. 10 slides: problem, product, market, business model, roadmap.">
+<meta property="og:image" content="https://www.docyonder.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="https://www.docyonder.com/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: 16:9 slides that scale with the screen (container units), stacked for scrolling, one per page when printed. */
+:root {
+  --blue: #007bff; --blue-ink: #0056b3; --navy: #0f2a44; --text: #2b3f55; --muted: #5d6f84;
+  --line: #dbe4ee; --paper: #ffffff; --panel: #eef5fd; --bg: #e8eef5; --good: #137a4b; --home: #b7c4d3;
+  --font: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.deck { display: grid; gap: 24px; justify-items: center; padding-block: 24px 48px; }
+.slide {
+  position: relative; width: min(100%, 1280px); aspect-ratio: 16 / 9; overflow: hidden; container-type: inline-size;
+  background: var(--paper); border-radius: 10px; box-shadow: 0 10px 30px -12px rgba(15,42,68,.25);
+  padding: 5.2cqw 6cqw; display: grid; align-content: center; gap: 2.2cqw;
+}
+.slide.dark { background: var(--navy); color: #c9d6e8; }
+.kicker { display: block; font: 600 1.15cqw/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--blue); }
+.dark .kicker { color: #4da3ff; }
+h1, h2 { margin: 0; color: var(--navy); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; text-wrap: balance; }
+.dark h1, .dark h2 { color: #fff; }
+h1 { font-size: 5cqw; }
+h2 { font-size: 3.3cqw; max-width: 36ch; }
+p { margin: 0; font-size: 1.6cqw; line-height: 1.5; }
+.lead { font-size: 1.9cqw; line-height: 1.5; max-width: 60ch; }
+.pn { position: absolute; right: 2.4cqw; bottom: 1.8cqw; font: 500 1cqw/1 var(--mono); color: var(--muted); }
+.dark .pn { color: #6f86a1; }
+.src { position: absolute; left: 6cqw; bottom: 1.8cqw; font-size: .95cqw; color: var(--muted); max-width: 80%; }
+.wordmark { font-weight: 800; letter-spacing: -0.02em; color: #fff; font-size: 2.4cqw; }
+.wordmark span { color: #4da3ff; }
+
+/* 1. Title */
+.title-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 4cqw; align-items: center; height: 100%; }
+.title-grid .meta { display: grid; gap: .6cqw; font: 500 1.25cqw/1.4 var(--mono); color: #8fa6c4; margin-top: 2cqw; }
+.title-grid .meta b { color: #fff; font-weight: 600; }
+.shot { width: 100%; border-radius: .8cqw; box-shadow: 0 2cqw 4cqw -1.5cqw rgba(0,0,0,.45); display: block; }
+
+/* 2. Problem */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2cqw; }
+.stat { background: var(--panel); border-radius: .8cqw; padding: 2cqw; display: grid; gap: .6cqw; }
+.stat b { font: 600 3.6cqw/1 var(--mono); color: var(--navy); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 1.35cqw; color: var(--muted); line-height: 1.4; }
+.pains { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2cqw; }
+.pains p { font-size: 1.45cqw; border-top: .25cqw solid var(--blue); padding-top: 1cqw; }
+.pains b { color: var(--navy); display: block; font-size: 1.6cqw; margin-bottom: .3cqw; }
+
+/* 3. Solution: real sequence */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.4cqw; counter-reset: s; margin-top: 1cqw; }
+.step { counter-increment: s; display: grid; gap: 1cqw; align-content: start; }
+.step::before { content: counter(s); width: 4cqw; height: 4cqw; border-radius: 50%; display: grid; place-items: center;
+  background: var(--blue); color: #fff; font: 600 1.8cqw/1 var(--mono); }
+.step b { font-size: 2cqw; color: var(--navy); }
+.step p { font-size: 1.45cqw; color: var(--text); }
+
+/* 4/5. Product */
+.prod { display: grid; grid-template-columns: 1.55fr 1fr; gap: 3.5cqw; align-items: center; }
+.ticks { margin: 0; padding: 0; list-style: none; display: grid; gap: 1.2cqw; }
+.ticks li { font-size: 1.5cqw; line-height: 1.45; padding-left: 2.2cqw; position: relative; }
+.ticks li::before { content: ""; position: absolute; left: 0; top: .55cqw; width: 1.1cqw; height: 1.1cqw; border-radius: 50%; background: var(--blue); }
+.ticks b { color: var(--navy); }
+.live { display: inline-flex; align-items: center; gap: .6cqw; font: 600 1.1cqw/1 var(--mono); color: var(--good); }
+.live::before { content: ""; width: .8cqw; height: .8cqw; border-radius: 50%; background: var(--good); }
+
+/* 6. Price gap chart */
+.chart { display: grid; gap: 1.05cqw; }
+.row { display: grid; grid-template-columns: 15cqw 1fr 21cqw; gap: 1.5cqw; align-items: center; }
+.row .name { font-size: 1.4cqw; font-weight: 700; color: var(--navy); }
+.track { position: relative; height: 2.2cqw; background: linear-gradient(to right, var(--line) 1px, transparent 1px) 0 0 / 25% 100%; }
+.bar { position: absolute; height: .8cqw; border-radius: .3cqw; }
+.bar.h { top: 0; background: var(--home); } .bar.a { top: 1.15cqw; background: var(--blue); }
+.row .fig { white-space: nowrap; font: 500 1cqw/1.35 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.row .fig b { color: var(--good); }
+.legend { display: flex; gap: 2.5cqw; font-size: 1.2cqw; color: var(--muted); }
+.legend i { display: inline-block; width: 2cqw; height: .8cqw; border-radius: .3cqw; margin-right: .6cqw; vertical-align: middle; }
+
+/* 7. Model */
+.model { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3cqw; align-items: start; }
+table { width: 100%; border-collapse: collapse; font-size: 1.3cqw; }
+th, td { text-align: left; padding: .9cqw 1cqw; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { font: 600 .95cqw/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--panel); }
+tbody th { color: var(--navy); }
+.num { font-family: var(--mono); white-space: nowrap; }
+.pill { display: inline-block; padding: .2cqw .7cqw; border-radius: 99px; font: 600 .95cqw/1.4 var(--mono); }
+.p-next { color: var(--blue-ink); background: #dbeafe; } .p-later { color: var(--muted); background: #e9eef4; }
+.calc { background: var(--panel); border-radius: .8cqw; padding: 2cqw; display: grid; gap: 1cqw; }
+.calc .line { display: flex; justify-content: space-between; gap: 1cqw; font-size: 1.35cqw; border-bottom: 1px solid var(--line); padding-bottom: .7cqw; }
+.calc .line:last-child { border: 0; font-weight: 800; color: var(--navy); font-size: 1.7cqw; }
+
+/* 8. Status */
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3cqw; }
+.box { border: 1px solid var(--line); border-radius: .8cqw; padding: 2cqw; display: grid; gap: 1.2cqw; align-content: start; }
+.box h3 { margin: 0; font-size: 1.7cqw; color: var(--navy); }
+
+/* 9. Competition */
+.compare td, .compare th { font-size: 1.35cqw; }
+.compare td:nth-child(3) { color: var(--navy); font-weight: 600; }
+
+/* 10. Ask */
+.ask-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3cqw; }
+.dark .ticks li { color: #dbe6f3; } .dark .ticks li::before { background: #4da3ff; } .dark .ticks b { color: #fff; }
+.contact { display: grid; gap: .6cqw; font: 500 1.5cqw/1.4 var(--mono); color: #fff; }
+.contact a { color: #8cc4ff; text-decoration: none; }
+.phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6cqw; }
+.phase { border-top: .3cqw solid #3a5068; padding-top: 1cqw; display: grid; gap: .5cqw; align-content: start; }
+.phase.now { border-color: #57d39a; } .phase.next { border-color: #4da3ff; }
+.phase span { font: 600 1cqw/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; color: #8fa6c4; }
+.phase p { font-size: 1.2cqw; color: #dbe6f3; }
+
+.hint { font-size: 13px; color: var(--muted); text-align: center; }
+a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+@media print {
+  @page { size: 13.333in 7.5in; margin: 0; }
+  body { background: #fff; padding: 0; }
+  .deck { gap: 0; padding: 0; }
+  .slide { width: 13.333in; height: 7.5in; aspect-ratio: auto; border-radius: 0; box-shadow: none; break-after: page; }
+  .hint { display: none; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+<main class="deck">
+
+<section class="slide dark" aria-label="Slide 1, title">
+  <div class="title-grid">
+    <div style="display:grid;gap:2.2cqw">
+      <div class="wordmark">Doc<span>Yonder</span></div>
+      <h1>Find the right doctor, near you or around the world.</h1>
+      <p class="lead" style="color:#c9d6e8">AI that explains your symptoms and medical reports, then connects you with real doctors nearby or trusted clinics abroad.</p>
+      <div class="meta"><span><b>Aprampal</b>, Founder</span><span>Pitch deck · November 2026</span><span>www.docyonder.com</span></div>
+    </div>
+    <img class="shot" src="img/home.jpg" alt="DocYonder home page with symptom search and report upload">
+  </div>
+  <span class="pn">01</span>
+</section>
+
+<section class="slide" aria-label="Slide 2, the problem">
+  <span class="kicker">The problem</span>
+  <h2>Patients wait, guess, and travel without guidance.</h2>
+  <div class="stats">
+    <div class="stat"><b>28.6 wks</b><span>Median wait in Canada from GP referral to treatment, 2025</span></div>
+    <div class="stat"><b>≈105,500</b><span>Canadians estimated to have gone abroad for medical care in 2025</span></div>
+    <div class="stat"><b>48.6 wks</b><span>Median wait for orthopaedic surgery in Canada, 2025</span></div>
+  </div>
+  <div class="pains">
+    <p><b>Reports are hard to read</b>Results arrive before the appointment, with no explanation of what matters.</p>
+    <p><b>Wrong doctor, wasted time</b>People don't know which specialist to see, or who is nearby.</p>
+    <p><b>Going abroad is a gamble</b>Most information comes from sites that sell the trip.</p>
+  </div>
+  <span class="src">Sources: Fraser Institute, Waiting Your Turn 2025; Leaving Canada for Medical Care 2025 (estimates).</span>
+  <span class="pn">02</span>
+</section>
+
+<section class="slide" aria-label="Slide 3, the solution">
+  <span class="kicker">The solution</span>
+  <h2>One place from "what's wrong?" to "who can treat me?"</h2>
+  <div class="steps">
+    <div class="step"><b>Understand</b><p>Describe symptoms or upload a lab report, scan or photo. AI explains every result in plain language and names the right specialist.</p></div>
+    <div class="step"><b>Find care nearby</b><p>Real doctors near the patient's location, anywhere in the world, with distance, ratings, hours, and one-tap Call or Directions.</p></div>
+    <div class="step"><b>Compare abroad</b><p>For treatments people travel for, typical prices against home, well-reviewed clinics, and a free quote request.</p></div>
+  </div>
+  <span class="pn">03</span>
+</section>
+
+<section class="slide" aria-label="Slide 4, product: report explainer">
+  <span class="kicker">Product · report explainer</span>
+  <div class="prod">
+    <img class="shot" src="img/report.jpg" alt="Lab report broken down into results, normal ranges and low or high status">
+    <div style="display:grid;gap:1.6cqw">
+      <h2 style="font-size:2.7cqw">Every result, explained.</h2>
+      <ul class="ticks">
+        <li>Reads PDFs, <b>scanned reports</b> and photos directly</li>
+        <li>Each value with its <b>normal range</b>, marked low, high or normal</li>
+        <li>What the report <b>points to</b>, and questions for the doctor</li>
+        <li>Says honestly when a report <b>doesn't explain</b> the patient's symptoms</li>
+      </ul>
+      <span class="live">Live at docyonder.com</span>
+    </div>
+  </div>
+  <span class="pn">04</span>
+</section>
+
+<section class="slide" aria-label="Slide 5, product: doctors near you and treatment abroad">
+  <span class="kicker">Product · find care</span>
+  <div class="prod">
+    <img class="shot" src="img/abroad.jpg" alt="Dermatologists near the patient in Toronto beside a hair transplant comparison for Istanbul">
+    <div style="display:grid;gap:1.6cqw">
+      <h2 style="font-size:2.7cqw">Local doctors first. Abroad when it makes sense.</h2>
+      <ul class="ticks">
+        <li><b>Worldwide</b> doctor search from the patient's location or any city</li>
+        <li>Ratings, distance, hours; <b>Call, Directions, Message</b></li>
+        <li>9 treatments compared: <b>destinations, typical prices, top clinics</b></li>
+        <li>AI suggests travel only when a treatment truly fits</li>
+      </ul>
+      <span class="live">Live at docyonder.com</span>
+    </div>
+  </div>
+  <span class="pn">05</span>
+</section>
+
+<section class="slide" aria-label="Slide 6, the price gap">
+  <span class="kicker">The price gap</span>
+  <h2>Typical prices abroad are a fraction of US self-pay.</h2>
+  <div class="legend"><span><i style="background:var(--home)"></i>US self-pay</span><span><i style="background:var(--blue)"></i>Abroad (destinations on DocYonder)</span><span>Each row on its own scale from $0</span></div>
+  <div class="chart" id="chart" role="img" aria-label="Price ranges abroad compared with US self-pay for eight treatments"></div>
+  <span class="src">Typical advertised ranges in USD from published medical-tourism guides (Medical Tourism Association, PlacidWay, Bookimed, EuroFertile); real quotes vary, travel extra.</span>
+  <span class="pn">06</span>
+</section>
+
+<section class="slide" aria-label="Slide 7, business model">
+  <span class="kicker">Business model</span>
+  <h2>Free for patients locally. Paid by clinics when patients travel.</h2>
+  <div class="model">
+    <table>
+      <thead><tr><th>Revenue stream</th><th>How it works</th><th>Rate</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><th>Clinic referral</th><td>Share of treatment price when a referred patient is treated</td><td class="num">5–20%*</td><td><span class="pill p-next">Next</span></td></tr>
+        <tr><th>Travel affiliate</th><td>Commission on hotels and flights booked via DocYonder</td><td class="num">Per booking</td><td><span class="pill p-next">Next</span></td></tr>
+        <tr><th>Coordination fee</th><td>Full trip planning: clinic, hotel, transfers, translator</td><td class="num">Flat fee</td><td><span class="pill p-later">Later</span></td></tr>
+        <tr><th>Sponsored listings</th><td>Clearly labelled, never mixed into ratings</td><td class="num">Monthly</td><td><span class="pill p-later">Later</span></td></tr>
+      </tbody>
+    </table>
+    <div class="calc">
+      <span class="kicker">Illustrative example</span>
+      <div class="line"><span>Hair transplant package, Istanbul</span><span class="num">$3,000</span></div>
+      <div class="line"><span>Referral commission</span><span class="num">× 10%</span></div>
+      <div class="line"><span>Revenue per treated patient</span><span class="num">$300</span></div>
+    </div>
+  </div>
+  <span class="src">*Published facilitator rates (My1Health 5–15%, Track360 10–20%); no independent industry survey found.</span>
+  <span class="pn">07</span>
+</section>
+
+<section class="slide" aria-label="Slide 8, where we are">
+  <span class="kicker">Where we are</span>
+  <h2>Built, live and ready for first partners.</h2>
+  <div class="cols">
+    <div class="box">
+      <h3>Done</h3>
+      <ul class="ticks">
+        <li>Product <b>live</b> at docyonder.com (Nov 2026)</li>
+        <li>Report explainer, symptom check, worldwide doctor search</li>
+        <li>Treatment-abroad comparisons for <b>9 treatments</b></li>
+        <li>Accounts, private medical files, automated testing and deploys</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Next 90 days (goals)</h3>
+      <ul class="ticks">
+        <li>Sign <b>3–5 partner clinics</b> (Istanbul, Tijuana, Budapest)</li>
+        <li>Launch a structured <b>quote request</b> with records upload</li>
+        <li>First users testing the report explainer with real results</li>
+        <li>Privacy policy, legal and medical-travel review</li>
+      </ul>
+    </div>
+  </div>
+  <span class="pn">08</span>
+</section>
+
+<section class="slide" aria-label="Slide 9, competition">
+  <span class="kicker">Competition</span>
+  <h2>Marketplaces list procedures. DocYonder starts with the patient.</h2>
+  <table class="compare">
+    <thead><tr><th></th><th>Medical travel marketplaces</th><th>DocYonder</th></tr></thead>
+    <tbody>
+      <tr><th>Starting point</th><td>A procedure and a destination</td><td>The patient's own symptoms or report</td></tr>
+      <tr><th>Local care</th><td>Rarely shown</td><td>Nearby doctors shown first</td></tr>
+      <tr><th>Prices</th><td>Clinic-provided</td><td>Typical ranges with linked sources</td></tr>
+      <tr><th>Ratings</th><td>Often collected by the platform</td><td>Independent Google Maps ratings</td></tr>
+      <tr><th>Report understanding</th><td>Not offered</td><td>AI explains every result</td></tr>
+    </tbody>
+  </table>
+  <span class="src">Examples of marketplaces: Bookimed, PlacidWay, MyMediTravel.</span>
+  <span class="pn">09</span>
+</section>
+
+<section class="slide dark" aria-label="Slide 10, roadmap and the ask">
+  <span class="kicker">Roadmap and the ask</span>
+  <h2>Help us connect patients with the right care.</h2>
+  <div class="ask-grid">
+    <div style="display:grid;gap:2cqw;align-content:start">
+      <div class="phases">
+        <div class="phase now"><span>Now</span><p>Live product, brand, worldwide search</p></div>
+        <div class="phase next"><span>Next</span><p>Quote form, first partner clinics, travel affiliates</p></div>
+        <div class="phase"><span>Later</span><p>Coordinators, verified clinic profiles, more languages</p></div>
+      </div>
+      <div class="contact">
+        <span>Aprampal, Founder</span>
+        <a href="mailto:contact@docyonder.com">contact@docyonder.com</a>
+        <a href="https://www.docyonder.com">www.docyonder.com</a>
+        <a href="https://apram602.github.io/docyonder-plan/demo.mp4">Watch the 46-second demo</a>
+      </div>
+    </div>
+    <ul class="ticks">
+      <li><b>Partner clinics</b> willing to pilot referrals</li>
+      <li><b>Advisors</b> in health privacy, medical-travel regulation and liability</li>
+      <li><b>Early users</b> to test the report explainer</li>
+      <li><b>Mentorship and pre-seed support</b> to reach first revenue</li>
+    </ul>
+  </div>
+  <span class="pn">10</span>
+</section>
+
+<p class="hint">Scroll for the next slide · <a href="../">Business plan</a> · <a href="DocYonder-pitch-deck.pdf">Download PDF</a></p>
+</main>
+
+<script>
+(function () {
+  const rows = [
+    ['Hair transplant', [10000, 15000], [2000, 4000]],
+    ['Dental implant', [3000, 5000], [700, 1400]],
+    ['Weight-loss surgery', [15000, 25000], [3000, 7000]],
+    ['Knee replacement', [35000, 65000], [4000, 18000]],
+    ['Rhinoplasty', [8000, 15000], [4000, 7500]],
+    ['IVF (one cycle)', [12000, 25000], [2700, 6600]],
+    ['LASIK (per eye)', [2000, 3000], [800, 2500]],
+    ['Heart bypass', [70000, 150000], [5000, 25000]],
+  ];
+  const fmt = (n) => '$' + (n >= 10000 ? Math.round(n / 1000) + 'k' : n.toLocaleString('en-US'));
+  const chart = document.getElementById('chart');
+  rows.forEach(([name, home, abroad]) => {
+    const max = home[1] * 1.05, pct = (v) => (v / max) * 100, mid = (a) => (a[0] + a[1]) / 2;
+    const saving = Math.round((1 - mid(abroad) / mid(home)) * 100);
+    const el = document.createElement('div'); el.className = 'row';
+    el.innerHTML = '<span class="name">' + name + '</span>' +
+      '<div class="track"><div class="bar h" style="left:' + pct(home[0]) + '%;width:' + (pct(home[1]) - pct(home[0])) + '%"></div>' +
+      '<div class="bar a" style="left:' + pct(abroad[0]) + '%;width:' + (pct(abroad[1]) - pct(abroad[0])) + '%"></div></div>' +
+      '<span class="fig">' + fmt(abroad[0]) + '–' + fmt(abroad[1]) + ' vs ' + fmt(home[0]) + '–' + fmt(home[1]) + '<br><b>≈' + saving + '% lower</b></span>';
+    chart.appendChild(el);
+  });
+})();
+</script>
+</body>
+</html>
